@@ -3,15 +3,20 @@ package main
 import (
 	"fmt"
 	"log"
-	"os"
+	//"os"
 	"strings"
+	"path/filepath"
 )
 
 func main() {
-		if len(os.Args) < 2 {
-		log.Fatal("Укажите полный путь до файла вторым аргументом")
+	// if len(os.Args) < 2 {
+	// log.Fatal("Укажите полный путь до файла вторым аргументом")
+	// }
+	filePth := "./test.txt"
+	abs_fname, err := filepath.Abs(filePth)
+	if err != nil {
+	log.Fatal(err)
 	}
-	filePth := os.Args[1]
 	var fileName, fileExt string
 	indE := strings.LastIndex(filePth, ".")
 	fileExt = filePth[indE+1:]
@@ -26,4 +31,7 @@ func main() {
 	// ) Они могут помочь для проверки решения
 	fmt.Printf("filename: %s\n", fileName)
 	fmt.Printf("extension: %s\n", fileExt)
+	fmt.Println("Полный путь: ", abs_fname)
+	fmt.Printf("Base: %s\n", filepath.Base(filePth))
+	fmt.Printf("Ext %s\n", filepath.Ext(filePth))
 }
